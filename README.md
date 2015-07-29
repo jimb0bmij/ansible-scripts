@@ -1,2 +1,2 @@
 # ansible-scripts
-# example scripts to do stuff
+Example scripts to do stuff.
