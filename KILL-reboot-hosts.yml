@@ -1,0 +1,23 @@
+---
+
+- hosts: all
+  gather_facts: no
+  tasks:
+
+    - name: KILL Reboot
+      remote_user: admin
+      become: yes
+      shell: echo 1 > /proc/sys/kernel/sysrq
+      shell: sleep 2 && echo b > /proc/sysrq-trigger
+      ignore_errors: true
+      poll: 0
+      async: 1
+
+    - name: Wait for the server to reboot
+      local_action:
+       module: wait_for
+         host={{ inventory_hostname }}
+         port=22
+         delay=30
+         timeout=300
+

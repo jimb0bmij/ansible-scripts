@@ -1,0 +1,12 @@
+---
+
+- hosts: all
+  tasks:
+  - name: reboot
+    remote_user: admin
+    become: yes
+    become_user: root
+    command: shutdown -r now "Ansible REBOOT triggered"
+    async: 0
+    poll: 0
+    ignore_errors: true
